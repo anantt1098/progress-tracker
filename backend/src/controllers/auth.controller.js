@@ -6,8 +6,10 @@ const cookieOptions = {
   httpOnly: true,
   secure: true,
   sameSite: "none",
+  path: "/",
   maxAge: 7 * 24 * 60 * 60 * 1000,
 };
+
 
 async function registerUser(req, res) {
   try {
@@ -38,7 +40,9 @@ async function registerUser(req, res) {
     });
 
     const token = jwt.sign(
-      { id: user._id },
+      {
+        id: user._id,
+      },
       process.env.JWT_SECRET,
       {
         expiresIn: "7d",
@@ -64,6 +68,7 @@ async function registerUser(req, res) {
     });
   }
 }
+
 
 
 async function loginUser(req, res) {
@@ -101,7 +106,9 @@ async function loginUser(req, res) {
 
 
     const token = jwt.sign(
-      { id: user._id },
+      {
+        id: user._id,
+      },
       process.env.JWT_SECRET,
       {
         expiresIn: "7d",
@@ -138,11 +145,12 @@ async function loginUser(req, res) {
 
 
 
+
 async function getCurrentUser(req, res) {
   try {
 
     const user = await userModel
-      .findById(req.user.id)
+      .findById(req.user._id)
       .select("-password");
 
 
@@ -173,6 +181,7 @@ async function getCurrentUser(req, res) {
 
 
 
+
 async function logoutUser(req, res) {
   try {
 
@@ -182,6 +191,7 @@ async function logoutUser(req, res) {
         httpOnly: true,
         secure: true,
         sameSite: "none",
+        path: "/",
       }
     );
 
