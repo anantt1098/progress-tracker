@@ -53,14 +53,8 @@ const Navbar = () => {
 
 
       {/* Logo */}
-      <h1 className="text-xl font-bold text-slate-800 sm:text-3xl dark:text-white">
-
-        Progress
-
-        <span className="ml-1 rounded-md bg-amber-500 px-3 py-1 text-black">
-          Hub
-        </span>
-
+      <h1 className="rounded-md bg-amber-500 px-3 py-1 text-xl font-bold text-black sm:text-3xl">
+        ProgressHub
       </h1>
 
 
