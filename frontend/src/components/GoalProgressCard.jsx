@@ -14,7 +14,7 @@ const GoalProgressCard = ({ goal, onUpdate }) => {
 
 
   return (
-    <div className="flex min-h-[520px] flex-col rounded-3xl bg-white p-4 shadow-lg transition duration-300 hover:-translate-y-2 hover:shadow-2xl sm:min-h-[650px] sm:p-6 dark:bg-slate-700">
+    <div className="flex min-h-[580px] flex-col rounded-3xl bg-white p-4 shadow-lg transition duration-300 hover:-translate-y-2 hover:shadow-2xl sm:min-h-[650px] sm:p-6 dark:bg-slate-700">
 
 
       <div className="flex flex-1 flex-col items-center">
@@ -22,7 +22,7 @@ const GoalProgressCard = ({ goal, onUpdate }) => {
 
         {/* Progress Circle */}
         <div
-          className="relative h-32 w-32 flex-shrink-0 cursor-pointer sm:h-40 sm:w-40"
+          className="relative mb-6 h-32 w-32 flex-shrink-0 cursor-pointer sm:mb-0 sm:h-40 sm:w-40"
           title="Click to mark today's progress"
           onClick={() => onUpdate(goal._id)}
         >
@@ -86,8 +86,9 @@ const GoalProgressCard = ({ goal, onUpdate }) => {
 
 
 
+
         {/* Goal Details */}
-        <div className="mt-5 flex min-h-[90px] w-full flex-col items-center text-center sm:mt-6 sm:min-h-[100px]">
+        <div className="mt-2 flex min-h-[120px] w-full flex-col items-center justify-start text-center sm:mt-6 sm:min-h-[100px]">
 
 
           <h2 className="break-words text-lg font-bold text-gray-800 sm:text-xl dark:text-slate-100">
@@ -111,8 +112,9 @@ const GoalProgressCard = ({ goal, onUpdate }) => {
 
 
 
+
         {/* Stats */}
-        <div className="mt-5 grid w-full grid-cols-2 gap-2 sm:mt-6 sm:gap-3">
+        <div className="mt-3 grid w-full grid-cols-2 gap-2 sm:mt-6 sm:gap-3">
 
 
           <div className="rounded-xl bg-blue-50 p-3 text-center sm:p-4 dark:bg-slate-600">
@@ -127,6 +129,7 @@ const GoalProgressCard = ({ goal, onUpdate }) => {
             </p>
 
           </div>
+
 
 
 
@@ -152,8 +155,11 @@ const GoalProgressCard = ({ goal, onUpdate }) => {
 
 
 
+
         {/* Bottom Section */}
-        <div className="mt-auto flex w-full flex-col items-center">
+        <div className="mt-6 flex w-full flex-col items-center sm:mt-auto">
+
+
 
 
 
@@ -188,6 +194,7 @@ const GoalProgressCard = ({ goal, onUpdate }) => {
             </span>
 
           </div>
+
 
 
 

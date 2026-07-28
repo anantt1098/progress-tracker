@@ -32,7 +32,25 @@ const Sidebar = ({
 
 
   return (
-    <aside className="sticky top-[73px] flex h-auto w-full flex-shrink-0 flex-col border-b bg-white p-4 dark:border-slate-700 dark:bg-slate-900 sm:p-6 lg:h-[calc(100vh-73px)] lg:w-80 lg:border-r lg:border-b-0">
+    <aside className="
+      flex 
+      w-full 
+      flex-shrink-0 
+      flex-col 
+      border-b 
+      bg-white 
+      p-4
+      dark:border-slate-700 
+      dark:bg-slate-900
+
+      lg:sticky 
+      lg:top-[73px]
+      lg:h-[calc(100vh-73px)]
+      lg:w-80
+      lg:border-r
+      lg:border-b-0
+      lg:p-6
+    ">
 
 
       {/* Add Goal */}
@@ -55,7 +73,24 @@ const Sidebar = ({
           placeholder="Search goals..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="w-full rounded-lg border border-slate-300 bg-white py-3 pl-11 pr-4 text-slate-800 placeholder-slate-400 focus:border-amber-500 focus:outline-none dark:border-slate-700 dark:bg-slate-800 dark:text-white"
+          className="
+            w-full 
+            rounded-lg 
+            border 
+            border-slate-300 
+            bg-white 
+            py-3 
+            pl-11 
+            pr-4 
+            text-slate-800 
+            placeholder-slate-400
+            focus:border-amber-500 
+            focus:outline-none
+
+            dark:border-slate-700
+            dark:bg-slate-800
+            dark:text-white
+          "
         />
 
       </div>
@@ -71,6 +106,7 @@ const Sidebar = ({
 
 
       <div className="flex-1 space-y-3 overflow-y-auto">
+
 
         {loading ? (
 
@@ -92,8 +128,20 @@ const Sidebar = ({
 
             <div
               key={goal._id}
-              className="overflow-hidden rounded-xl border border-slate-200 p-4 shadow-sm transition hover:shadow-md dark:border-slate-700 dark:bg-slate-800"
+              className="
+                overflow-hidden
+                rounded-xl
+                border
+                border-slate-200
+                p-4
+                shadow-sm
+                transition
+                hover:shadow-md
+                dark:border-slate-700
+                dark:bg-slate-800
+              "
             >
+
 
               <div className="flex items-start justify-between gap-2">
 
@@ -134,10 +182,12 @@ const Sidebar = ({
                     <FaTrash />
                   </button>
 
+
                 </div>
 
 
               </div>
+
 
 
 
@@ -166,6 +216,7 @@ const Sidebar = ({
           ))
 
         )}
+
 
       </div>
 
