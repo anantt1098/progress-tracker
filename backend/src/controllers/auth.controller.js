@@ -59,6 +59,9 @@ async function registerUser(req, res) {
     );
 
 
+    console.log("Register cookie set");
+
+
     return res.status(201).json({
       message: "User registered successfully",
       user: {
@@ -92,11 +95,9 @@ async function loginUser(req, res) {
 
 
     if (!username || !password) {
-
       return res.status(400).json({
         message: "Username and password are required",
       });
-
     }
 
 
@@ -107,11 +108,9 @@ async function loginUser(req, res) {
 
 
     if (!user) {
-
       return res.status(401).json({
         message: "Invalid credentials",
       });
-
     }
 
 
@@ -124,11 +123,9 @@ async function loginUser(req, res) {
 
 
     if (!isPasswordValid) {
-
       return res.status(401).json({
         message: "Invalid credentials",
       });
-
     }
 
 
@@ -150,6 +147,9 @@ async function loginUser(req, res) {
       token,
       cookieOptions
     );
+
+
+    console.log("Login cookie set:", token.substring(0, 20) + "...");
 
 
 
@@ -183,6 +183,7 @@ async function loginUser(req, res) {
 
 
 
+
 // GET CURRENT USER
 async function getCurrentUser(req, res) {
 
@@ -194,11 +195,9 @@ async function getCurrentUser(req, res) {
 
 
     if (!user) {
-
       return res.status(404).json({
         message: "User not found",
       });
-
     }
 
 
@@ -227,25 +226,30 @@ async function getCurrentUser(req, res) {
 
 
 
+
 // LOGOUT USER
-async function logoutUser(req,res){
+async function logoutUser(req, res) {
 
   try {
 
-
     res.clearCookie(
       "token",
-      cookieOptions
+      {
+        httpOnly: true,
+        secure: true,
+        sameSite: "none",
+        path: "/",
+      }
     );
 
 
     return res.status(200).json({
-      message:"Logged out successfully",
+      message: "Logged out successfully",
     });
 
 
 
-  } catch(error){
+  } catch(error) {
 
 
     console.error(
@@ -255,9 +259,8 @@ async function logoutUser(req,res){
 
 
     return res.status(500).json({
-      message:"Internal Server Error",
+      message: "Internal Server Error",
     });
-
 
   }
 

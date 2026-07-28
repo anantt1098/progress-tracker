@@ -8,7 +8,7 @@ import { useAuth } from "../context/AuthContext";
 
 const Login = () => {
   const navigate = useNavigate();
-  const { login, user } = useAuth();
+  const { login, user, checkAuth } = useAuth();
 
   const [showPassword, setShowPassword] = useState(false);
 
@@ -25,12 +25,14 @@ const Login = () => {
     }
   }, [user, navigate]);
 
+
   const handleChange = (e) => {
     setFormData((prev) => ({
       ...prev,
       [e.target.name]: e.target.value,
     }));
   };
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -45,25 +47,49 @@ const Login = () => {
         password: formData.password,
       };
 
-      const { data } = await api.post("/auth/login", payload);
 
+      const { data } = await api.post(
+        "/auth/login",
+        payload
+      );
+
+
+      // Update user state
       login(data.user);
+
+
+      // Verify cookie authentication
+      await checkAuth();
+
 
       toast.success(data.message);
 
-      navigate("/dashboard", { replace: true });
+
+      navigate("/dashboard", {
+        replace: true,
+      });
+
+
     } catch (error) {
+
       toast.error(
-        error.response?.data?.message || "Login failed"
+        error.response?.data?.message ||
+        "Login failed"
       );
+
     } finally {
+
       setLoading(false);
+
     }
   };
 
+
   return (
     <div className="flex min-h-screen items-center justify-center bg-slate-100 px-4">
+
       <div className="w-full max-w-md rounded-2xl bg-white p-8 shadow-xl">
+
         <h1 className="mb-2 text-center text-4xl font-bold">
           Progress
           <span className="ml-1 rounded-md bg-amber-500 px-2 py-1 text-black">
@@ -71,15 +97,23 @@ const Login = () => {
           </span>
         </h1>
 
+
         <p className="mb-8 text-center text-slate-500">
           Welcome back! Login to continue.
         </p>
 
-        <form onSubmit={handleSubmit} className="space-y-5">
+
+        <form
+          onSubmit={handleSubmit}
+          className="space-y-5"
+        >
+
           <div>
+
             <label className="mb-2 block font-medium">
               Username
             </label>
+
 
             <input
               type="text"
@@ -90,14 +124,20 @@ const Login = () => {
               className="w-full rounded-lg border border-slate-300 px-4 py-3 focus:border-amber-500 focus:outline-none"
               required
             />
+
           </div>
 
+
+
           <div>
+
             <label className="mb-2 block font-medium">
               Password
             </label>
 
+
             <div className="relative">
+
               <input
                 type={showPassword ? "text" : "password"}
                 name="password"
@@ -108,15 +148,26 @@ const Login = () => {
                 required
               />
 
+
               <button
                 type="button"
-                onClick={() => setShowPassword((prev) => !prev)}
+                onClick={() =>
+                  setShowPassword((prev) => !prev)
+                }
                 className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-500"
               >
-                {showPassword ? <FaEyeSlash /> : <FaEye />}
+                {showPassword ? (
+                  <FaEyeSlash />
+                ) : (
+                  <FaEye />
+                )}
               </button>
+
             </div>
+
           </div>
+
+
 
           <button
             type="submit"
@@ -125,20 +176,31 @@ const Login = () => {
           >
             {loading ? "Logging in..." : "Login"}
           </button>
+
+
         </form>
 
+
+
         <p className="mt-6 text-center text-sm text-slate-600">
+
           Don't have an account?{" "}
+
           <Link
             to="/register"
             className="font-semibold text-amber-500 hover:underline"
           >
             Register
           </Link>
+
         </p>
+
+
       </div>
+
     </div>
   );
 };
+
 
 export default Login;
