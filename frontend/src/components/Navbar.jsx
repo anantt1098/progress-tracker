@@ -53,13 +53,15 @@ const Navbar = () => {
 
 
       {/* Logo */}
-      <h1 className="text-xl font-bold text-slate-800 sm:text-3xl dark:text-white">
+      <h1 className="text-xl font-bold sm:text-3xl">
 
         <span className="rounded-md bg-amber-500 px-2 py-1 text-black">
           Pro
         </span>
 
-        gressHub
+        <span className="ml-1 rounded-md bg-blue-600 px-2 py-1 text-white">
+          gressHub
+        </span>
 
       </h1>
 
