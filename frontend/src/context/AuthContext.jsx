@@ -7,38 +7,72 @@ export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // Check if user is logged in
+
   const checkAuth = async () => {
     try {
-      const { data } = await api.get("/auth/me");
+      const response = await api.get("/auth/me");
 
-      setUser(data);
+      setUser(response.data);
+
     } catch (error) {
+
+      console.log(
+        "Auth check failed:",
+        error.response?.data?.message
+      );
+
       setUser(null);
+
     } finally {
+
       setLoading(false);
+
     }
   };
+
 
   useEffect(() => {
+
     checkAuth();
+
   }, []);
 
-  // Login
-  const login = (userData) => {
+
+
+  const login = async (userData) => {
+
+    // set temporary user
     setUser(userData);
+
+    // verify cookie session
+    await checkAuth();
+
   };
 
-  // Logout
+
+
   const logout = async () => {
+
     try {
+
       await api.post("/auth/logout");
+
     } catch (error) {
-      console.error(error);
+
+      console.log(
+        "Logout error:",
+        error.response?.data
+      );
+
     } finally {
+
       setUser(null);
+
     }
+
   };
+
+
 
   return (
     <AuthContext.Provider
@@ -50,9 +84,14 @@ export function AuthProvider({ children }) {
         checkAuth,
       }}
     >
+
       {children}
+
     </AuthContext.Provider>
   );
+
 }
+
+
 
 export const useAuth = () => useContext(AuthContext);
