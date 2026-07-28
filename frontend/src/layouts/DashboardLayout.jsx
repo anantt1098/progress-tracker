@@ -58,7 +58,7 @@ const DashboardLayout = () => {
       <Navbar />
 
 
-      <div className="flex pt-[73px]">
+      <div className="flex flex-col pt-[73px] lg:flex-row">
 
 
         <Sidebar
@@ -71,7 +71,7 @@ const DashboardLayout = () => {
 
 
 
-        <main className="min-h-[calc(100vh-73px)] flex-1 bg-slate-100 p-8 dark:bg-slate-950">
+        <main className="min-h-[calc(100vh-73px)] flex-1 bg-slate-100 p-3 sm:p-8 dark:bg-slate-950">
 
 
           <Outlet
@@ -89,6 +89,7 @@ const DashboardLayout = () => {
 
 
       </div>
+
 
 
 

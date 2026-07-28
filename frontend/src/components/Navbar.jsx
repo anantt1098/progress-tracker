@@ -49,41 +49,55 @@ const Navbar = () => {
 
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 flex h-[73px] items-center justify-between border-b bg-white px-8 shadow-sm dark:border-slate-700 dark:bg-slate-900">
+    <header className="fixed top-0 left-0 right-0 z-50 flex h-[73px] items-center justify-between border-b bg-white px-3 shadow-sm sm:px-8 dark:border-slate-700 dark:bg-slate-900">
+
 
       {/* Logo */}
-      <h1 className="text-3xl font-bold text-slate-800 dark:text-white">
+      <h1 className="text-xl font-bold text-slate-800 sm:text-3xl dark:text-white">
+
         Progress
+
         <span className="ml-1 rounded-md bg-amber-500 px-2 py-1 text-black">
           Hub
         </span>
+
       </h1>
 
 
-      <div className="flex items-center gap-5">
+
+
+      <div className="flex items-center gap-2 sm:gap-5">
 
 
         {/* Dark Mode Button */}
         <button
           onClick={toggleDarkMode}
-          className="flex h-10 w-10 items-center justify-center rounded-full 
+          className="flex h-9 w-9 items-center justify-center rounded-full 
           bg-slate-200 text-slate-700 transition hover:bg-slate-300
+          sm:h-10 sm:w-10
           dark:bg-slate-700 dark:text-yellow-400"
         >
           {darkMode ? <FaSun /> : <FaMoon />}
         </button>
 
 
-        {/* User */}
-        <div className="flex items-center gap-3">
 
-          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-amber-500 font-bold text-black">
+
+
+        {/* User */}
+        <div className="flex items-center gap-2 sm:gap-3">
+
+
+          <div className="flex h-9 w-9 items-center justify-center rounded-full bg-amber-500 font-bold text-black sm:h-10 sm:w-10">
+
             {user?.username ? (
               user.username.charAt(0).toUpperCase()
             ) : (
               <FaUserCircle />
             )}
+
           </div>
+
 
 
           <div className="hidden sm:block">
@@ -92,28 +106,39 @@ const Navbar = () => {
               {user?.username || "Guest"}
             </p>
 
+
             <p className="text-sm text-slate-500 dark:text-slate-400">
               {user?.email}
             </p>
 
           </div>
 
+
         </div>
+
+
+
 
 
         {/* Logout */}
         <button
           onClick={handleLogout}
           disabled={loading}
-          className="flex items-center gap-2 rounded-lg bg-red-500 px-4 py-2 font-medium text-white transition hover:bg-red-600 disabled:cursor-not-allowed disabled:opacity-60"
+          className="flex items-center gap-2 rounded-lg bg-red-500 px-3 py-2 text-sm font-medium text-white transition hover:bg-red-600 disabled:cursor-not-allowed disabled:opacity-60 sm:px-4 sm:text-base"
         >
+
           <FaSignOutAlt />
 
-          {loading ? "Logging out..." : "Logout"}
+          <span className="hidden sm:inline">
+            {loading ? "Logging out..." : "Logout"}
+          </span>
+
         </button>
 
 
+
       </div>
+
 
     </header>
   );

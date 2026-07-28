@@ -9,6 +9,7 @@ const Dashboard = () => {
     updateDailyProgress,
   } = useOutletContext();
 
+
   if (loading) {
     return (
       <div className="flex min-h-screen items-center justify-center dark:bg-slate-950">
@@ -39,13 +40,15 @@ const Dashboard = () => {
   ).length;
 
 
+
   return (
-    <div className="min-h-screen space-y-8 bg-slate-100 dark:bg-slate-950">
+    <div className="min-h-screen space-y-5 bg-slate-100 p-2 sm:space-y-8 sm:p-0 dark:bg-slate-950">
+
 
       {/* Header */}
-      <div className="rounded-3xl bg-gradient-to-r from-blue-600 to-indigo-700 p-8 text-white shadow-xl">
+      <div className="rounded-3xl bg-gradient-to-r from-blue-600 to-indigo-700 p-5 text-white shadow-xl sm:p-8">
 
-        <h1 className="text-4xl font-bold">
+        <h1 className="text-2xl font-bold sm:text-4xl">
           Daily Progress Dashboard 🚀
         </h1>
 
@@ -56,11 +59,13 @@ const Dashboard = () => {
       </div>
 
 
+
+
       {/* Statistics */}
       <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
 
 
-        <div className="rounded-2xl bg-white p-6 shadow-md dark:bg-slate-800">
+        <div className="rounded-2xl bg-white p-4 shadow-md sm:p-6 dark:bg-slate-800">
 
           <p className="text-gray-500 dark:text-slate-300">
             Total Goals
@@ -74,7 +79,7 @@ const Dashboard = () => {
 
 
 
-        <div className="rounded-2xl bg-white p-6 shadow-md dark:bg-slate-800">
+        <div className="rounded-2xl bg-white p-4 shadow-md sm:p-6 dark:bg-slate-800">
 
           <p className="text-gray-500 dark:text-slate-300">
             Completed
@@ -88,7 +93,7 @@ const Dashboard = () => {
 
 
 
-        <div className="rounded-2xl bg-white p-6 shadow-md dark:bg-slate-800">
+        <div className="rounded-2xl bg-white p-4 shadow-md sm:p-6 dark:bg-slate-800">
 
           <p className="text-gray-500 dark:text-slate-300">
             In Progress
@@ -102,7 +107,7 @@ const Dashboard = () => {
 
 
 
-        <div className="rounded-2xl bg-white p-6 shadow-md dark:bg-slate-800">
+        <div className="rounded-2xl bg-white p-4 shadow-md sm:p-6 dark:bg-slate-800">
 
           <p className="flex items-center gap-2 text-gray-500 dark:text-slate-300">
             🔥 Current Streak
@@ -126,15 +131,18 @@ const Dashboard = () => {
 
 
 
+
+
       {/* Goals Container */}
-      <div className="rounded-3xl bg-white p-8 shadow-lg dark:bg-slate-900">
+      <div className="rounded-3xl bg-white p-4 shadow-lg sm:p-8 dark:bg-slate-900">
 
 
-        <div className="mb-8 flex items-center justify-between">
+        <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+
 
           <div>
 
-            <h2 className="text-2xl font-bold text-gray-800 dark:text-white">
+            <h2 className="text-xl font-bold text-gray-800 sm:text-2xl dark:text-white">
               Your Goals
             </h2>
 
@@ -148,7 +156,7 @@ const Dashboard = () => {
 
 
 
-          <div className="rounded-full bg-blue-100 px-5 py-2 text-sm font-semibold text-blue-700 dark:bg-blue-900 dark:text-blue-200">
+          <div className="w-fit rounded-full bg-blue-100 px-5 py-2 text-sm font-semibold text-blue-700 dark:bg-blue-900 dark:text-blue-200">
 
             {totalGoals} Goals
 
@@ -160,9 +168,11 @@ const Dashboard = () => {
 
 
 
+
+
         {goals.length === 0 ? (
 
-          <div className="rounded-2xl border-2 border-dashed border-gray-300 py-20 text-center dark:border-slate-700">
+          <div className="rounded-2xl border-2 border-dashed border-gray-300 py-12 text-center sm:py-20 dark:border-slate-700">
 
 
             <div className="text-6xl">
@@ -187,7 +197,8 @@ const Dashboard = () => {
         ) : (
 
 
-          <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
+          <div className="grid gap-5 sm:gap-8 md:grid-cols-2 xl:grid-cols-3">
+
 
             {goals.map((goal) => (
 
@@ -212,15 +223,17 @@ const Dashboard = () => {
 
 
 
+
       {/* Summary */}
       {goals.length > 0 && (
 
-        <div className="rounded-3xl bg-gradient-to-r from-green-500 to-emerald-600 p-8 text-white shadow-lg">
+        <div className="rounded-3xl bg-gradient-to-r from-green-500 to-emerald-600 p-5 text-white shadow-lg sm:p-8">
 
 
-          <h2 className="text-2xl font-bold">
+          <h2 className="text-xl font-bold sm:text-2xl">
             Progress Summary
           </h2>
+
 
 
 
@@ -241,6 +254,7 @@ const Dashboard = () => {
 
 
 
+
             <div>
 
               <p className="text-green-100">
@@ -252,6 +266,7 @@ const Dashboard = () => {
               </h3>
 
             </div>
+
 
 
 
