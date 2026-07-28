@@ -57,7 +57,7 @@ const Navbar = () => {
 
         Progress
 
-        <span className="ml-1 rounded-md bg-amber-500 px-2 py-1 text-black">
+        <span className="ml-1 rounded-md bg-blue-600 px-2 py-1 text-white">
           Hub
         </span>
 
@@ -88,7 +88,7 @@ const Navbar = () => {
         <div className="flex items-center gap-2 sm:gap-3">
 
 
-          <div className="flex h-9 w-9 items-center justify-center rounded-full bg-amber-500 font-bold text-black sm:h-10 sm:w-10">
+          <div className="flex h-9 w-9 items-center justify-center rounded-full bg-blue-600 font-bold text-white sm:h-10 sm:w-10">
 
             {user?.username ? (
               user.username.charAt(0).toUpperCase()

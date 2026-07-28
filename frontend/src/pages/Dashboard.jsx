@@ -99,7 +99,7 @@ const Dashboard = () => {
             In Progress
           </p>
 
-          <h2 className="mt-3 text-4xl font-bold text-yellow-500">
+          <h2 className="mt-3 text-4xl font-bold text-blue-600">
             {inProgressGoals}
           </h2>
 
@@ -114,7 +114,7 @@ const Dashboard = () => {
           </p>
 
 
-          <h2 className="mt-3 text-4xl font-bold text-orange-500">
+          <h2 className="mt-3 text-4xl font-bold text-blue-600">
             {user?.streak || 0}
           </h2>
 
