@@ -39,7 +39,6 @@ app.use(
       "POST",
       "PUT",
       "DELETE",
-      "OPTIONS",
     ],
 
     allowedHeaders: [
@@ -48,9 +47,6 @@ app.use(
     ],
   })
 );
-
-
-app.options("*", cors());
 
 
 app.use(express.json());
@@ -62,7 +58,6 @@ app.use(cookieParser());
 app.use("/api/auth", authRoutes);
 app.use("/api/tracks", trackRoutes);
 app.use("/api/dashboard", dashboardRoutes);
-
 
 
 app.get("/", (req, res) => {
