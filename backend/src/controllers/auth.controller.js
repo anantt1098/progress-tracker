@@ -4,8 +4,9 @@ const bcrypt = require("bcryptjs");
 
 const cookieOptions = {
   httpOnly: true,
-  secure: process.env.NODE_ENV === "production",
-  sameSite: "lax",
+  secure: true,
+  sameSite: "none",
+  maxAge: 7 * 24 * 60 * 60 * 1000,
 };
 
 async function registerUser(req, res) {
@@ -39,7 +40,9 @@ async function registerUser(req, res) {
     const token = jwt.sign(
       { id: user._id },
       process.env.JWT_SECRET,
-      { expiresIn: "7d" }
+      {
+        expiresIn: "7d",
+      }
     );
 
     res.cookie("token", token, cookieOptions);
@@ -52,6 +55,7 @@ async function registerUser(req, res) {
         email: user.email,
       },
     });
+
   } catch (error) {
     console.error("Register Error:", error);
 
@@ -60,6 +64,7 @@ async function registerUser(req, res) {
     });
   }
 }
+
 
 async function loginUser(req, res) {
   try {
@@ -71,7 +76,9 @@ async function loginUser(req, res) {
       });
     }
 
-    const user = await userModel.findOne({ username });
+    const user = await userModel.findOne({
+      username,
+    });
 
     if (!user) {
       return res.status(401).json({
@@ -79,10 +86,12 @@ async function loginUser(req, res) {
       });
     }
 
+
     const isPasswordValid = await bcrypt.compare(
       password,
       user.password
     );
+
 
     if (!isPasswordValid) {
       return res.status(401).json({
@@ -90,13 +99,22 @@ async function loginUser(req, res) {
       });
     }
 
+
     const token = jwt.sign(
       { id: user._id },
       process.env.JWT_SECRET,
-      { expiresIn: "7d" }
+      {
+        expiresIn: "7d",
+      }
     );
 
-    res.cookie("token", token, cookieOptions);
+
+    res.cookie(
+      "token",
+      token,
+      cookieOptions
+    );
+
 
     return res.status(200).json({
       message: "User logged in successfully",
@@ -106,7 +124,10 @@ async function loginUser(req, res) {
         email: user.email,
       },
     });
+
+
   } catch (error) {
+
     console.error("Login Error:", error);
 
     return res.status(500).json({
@@ -115,11 +136,15 @@ async function loginUser(req, res) {
   }
 }
 
+
+
 async function getCurrentUser(req, res) {
   try {
+
     const user = await userModel
       .findById(req.user.id)
       .select("-password");
+
 
     if (!user) {
       return res.status(404).json({
@@ -127,31 +152,61 @@ async function getCurrentUser(req, res) {
       });
     }
 
+
     return res.status(200).json(user);
+
+
   } catch (error) {
-    console.error("Get Current User Error:", error);
+
+    console.error(
+      "Get Current User Error:",
+      error
+    );
+
 
     return res.status(500).json({
       message: "Internal Server Error",
     });
+
   }
 }
 
+
+
 async function logoutUser(req, res) {
   try {
-    res.clearCookie("token", cookieOptions);
+
+    res.clearCookie(
+      "token",
+      {
+        httpOnly: true,
+        secure: true,
+        sameSite: "none",
+      }
+    );
+
 
     return res.status(200).json({
       message: "Logged out successfully",
     });
+
+
   } catch (error) {
-    console.error("Logout Error:", error);
+
+    console.error(
+      "Logout Error:",
+      error
+    );
+
 
     return res.status(500).json({
       message: "Internal Server Error",
     });
+
   }
 }
+
+
 
 module.exports = {
   registerUser,
