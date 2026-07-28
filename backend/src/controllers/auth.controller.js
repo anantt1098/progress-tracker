@@ -2,14 +2,6 @@ const userModel = require("../models/user.model");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 
-const cookieOptions = {
-  httpOnly: true,
-  secure: true,
-  sameSite: "none",
-  maxAge: 7 * 24 * 60 * 60 * 1000,
-};
-
-
 // REGISTER USER
 async function registerUser(req, res) {
   try {
@@ -40,21 +32,14 @@ async function registerUser(req, res) {
     });
 
     const token = jwt.sign(
-      {
-        id: user._id,
-      },
+      { id: user._id },
       process.env.JWT_SECRET,
-      {
-        expiresIn: "7d",
-      }
+      { expiresIn: "7d" }
     );
-
-    res.cookie("token", token, cookieOptions);
-
-    console.log("Register cookie set");
 
     return res.status(201).json({
       message: "User registered successfully",
+      token,
       user: {
         id: user._id,
         username: user.username,
@@ -64,18 +49,15 @@ async function registerUser(req, res) {
 
   } catch (error) {
     console.error("Register Error:", error);
-
     return res.status(500).json({
       message: "Internal Server Error",
     });
   }
 }
 
-
 // LOGIN USER
 async function loginUser(req, res) {
   try {
-
     const { username, password } = req.body;
 
     if (!username || !password) {
@@ -84,11 +66,7 @@ async function loginUser(req, res) {
       });
     }
 
-
-    const user = await userModel.findOne({
-      username,
-    });
-
+    const user = await userModel.findOne({ username });
 
     if (!user) {
       return res.status(401).json({
@@ -96,12 +74,7 @@ async function loginUser(req, res) {
       });
     }
 
-
-    const isPasswordValid = await bcrypt.compare(
-      password,
-      user.password
-    );
-
+    const isPasswordValid = await bcrypt.compare(password, user.password);
 
     if (!isPasswordValid) {
       return res.status(401).json({
@@ -109,33 +82,17 @@ async function loginUser(req, res) {
       });
     }
 
-
     const token = jwt.sign(
-      {
-        id: user._id,
-      },
+      { id: user._id },
       process.env.JWT_SECRET,
-      {
-        expiresIn: "7d",
-      }
+      { expiresIn: "7d" }
     );
 
-
-    res.cookie(
-      "token",
-      token,
-      cookieOptions
-    );
-
-
-    console.log(
-      "Login cookie set:",
-      token.substring(0, 20) + "..."
-    );
-
+    console.log("Login token issued:", token.substring(0, 20) + "...");
 
     return res.status(200).json({
       message: "User logged in successfully",
+      token,
       user: {
         id: user._id,
         username: user.username,
@@ -143,26 +100,18 @@ async function loginUser(req, res) {
       },
     });
 
-
   } catch (error) {
-
     console.error("Login Error:", error);
-
     return res.status(500).json({
       message: "Internal Server Error",
     });
   }
 }
 
-
 // GET CURRENT USER
 async function getCurrentUser(req, res) {
   try {
-
-    const user = await userModel
-      .findById(req.user._id)
-      .select("-password");
-
+    const user = await userModel.findById(req.user._id).select("-password");
 
     if (!user) {
       return res.status(404).json({
@@ -170,54 +119,31 @@ async function getCurrentUser(req, res) {
       });
     }
 
-
     return res.status(200).json(user);
 
-
   } catch (error) {
-
-    console.error(
-      "Get Current User Error:",
-      error
-    );
-
+    console.error("Get Current User Error:", error);
     return res.status(500).json({
       message: "Internal Server Error",
     });
-
   }
 }
 
-
 // LOGOUT USER
+// With token-based auth, logout is handled client-side by deleting the token.
+// This endpoint exists mainly for consistency / future blacklist support.
 async function logoutUser(req, res) {
   try {
-
-    res.clearCookie(
-      "token",
-      cookieOptions
-    );
-
-
     return res.status(200).json({
       message: "Logged out successfully",
     });
-
-
   } catch (error) {
-
-    console.error(
-      "Logout Error:",
-      error
-    );
-
+    console.error("Logout Error:", error);
     return res.status(500).json({
       message: "Internal Server Error",
     });
   }
 }
-
-
 
 module.exports = {
   registerUser,

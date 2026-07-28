@@ -8,7 +8,7 @@ import { useAuth } from "../context/AuthContext";
 
 const Login = () => {
   const navigate = useNavigate();
-  const { login, user, checkAuth } = useAuth();
+  const { login, user } = useAuth();
 
   const [showPassword, setShowPassword] = useState(false);
 
@@ -54,12 +54,8 @@ const Login = () => {
       );
 
 
-      // Update user state
-      login(data.user);
-
-
-      // Verify cookie authentication
-      await checkAuth();
+      // Store token and update user state
+      await login(data.user, data.token);
 
 
       toast.success(data.message);
