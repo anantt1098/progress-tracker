@@ -70,18 +70,28 @@ const Register = () => {
   return (
     <div className="flex min-h-screen items-center justify-center bg-slate-100 px-4">
       <div className="w-full max-w-md rounded-2xl bg-white p-8 shadow-xl">
+
+        {/* Logo */}
         <h1 className="mb-2 text-center text-4xl font-bold">
-          Progress
-          <span className="ml-1 rounded-md bg-amber-500 px-2 py-1 text-black">
-            Hub
+
+          <span className="rounded-md bg-amber-500 px-2 py-1 text-black">
+            Pro
           </span>
+
+          <span className="ml-1 rounded-md bg-blue-600 px-2 py-1 text-white">
+            gressHub
+          </span>
+
         </h1>
+
 
         <p className="mb-8 text-center text-slate-500">
           Create your account
         </p>
 
+
         <form onSubmit={handleSubmit} className="space-y-5">
+
           <div>
             <label className="mb-2 block font-medium">
               Username
@@ -97,6 +107,7 @@ const Register = () => {
               required
             />
           </div>
+
 
           <div>
             <label className="mb-2 block font-medium">
@@ -114,12 +125,14 @@ const Register = () => {
             />
           </div>
 
+
           <div>
             <label className="mb-2 block font-medium">
               Password
             </label>
 
             <div className="relative">
+
               <input
                 type={showPassword ? "text" : "password"}
                 name="password"
@@ -137,8 +150,10 @@ const Register = () => {
               >
                 {showPassword ? <FaEyeSlash /> : <FaEye />}
               </button>
+
             </div>
           </div>
+
 
           <div>
             <label className="mb-2 block font-medium">
@@ -146,6 +161,7 @@ const Register = () => {
             </label>
 
             <div className="relative">
+
               <input
                 type={showConfirmPassword ? "text" : "password"}
                 name="confirmPassword"
@@ -169,8 +185,10 @@ const Register = () => {
                   <FaEye />
                 )}
               </button>
+
             </div>
           </div>
+
 
           <button
             type="submit"
@@ -179,17 +197,23 @@ const Register = () => {
           >
             {loading ? "Creating Account..." : "Register"}
           </button>
+
         </form>
 
+
         <p className="mt-6 text-center text-sm text-slate-600">
+
           Already have an account?{" "}
+
           <Link
             to="/"
             className="font-semibold text-amber-500 hover:underline"
           >
             Login
           </Link>
+
         </p>
+
       </div>
     </div>
   );
