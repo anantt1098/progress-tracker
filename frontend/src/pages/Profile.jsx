@@ -1,9 +1,14 @@
 import CalendarHeatmap from "react-calendar-heatmap";
 import "react-calendar-heatmap/dist/styles.css";
-import { useOutletContext } from "react-router-dom";
+import "../styles/heatmap.css";
+
+import { useOutletContext, useNavigate } from "react-router-dom";
+import { FaArrowLeft } from "react-icons/fa";
 
 
 const Profile = () => {
+
+  const navigate = useNavigate();
 
   const {
     user,
@@ -24,6 +29,19 @@ const Profile = () => {
 
 
       <div className="mx-auto max-w-5xl space-y-8">
+
+
+
+        {/* Back Button */}
+        <button
+          onClick={() => navigate("/dashboard")}
+          className="flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 font-medium text-white transition hover:bg-blue-700"
+        >
+          <FaArrowLeft />
+          Back to Dashboard
+        </button>
+
+
 
 
 
@@ -83,6 +101,7 @@ const Profile = () => {
 
 
 
+
           <div className="rounded-2xl bg-white p-6 text-center shadow-md dark:bg-slate-900">
 
             <p className="text-slate-500 dark:text-slate-400">
@@ -95,6 +114,7 @@ const Profile = () => {
             </h2>
 
           </div>
+
 
 
 
@@ -114,6 +134,7 @@ const Profile = () => {
 
 
         </div>
+
 
 
 
