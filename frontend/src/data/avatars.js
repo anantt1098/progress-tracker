@@ -7,9 +7,8 @@ import {
   FaGamepad,
   FaBolt,
   FaCode,
+  FaMagic,
 } from "react-icons/fa";
-
-import { GiSnitchQuidditch } from "react-icons/gi";
 
 
 export const avatars = [
@@ -64,8 +63,8 @@ export const avatars = [
 
   {
     id: "snitch",
-    name: "Snitch",
-    icon: GiSnitchQuidditch,
+    name: "Golden Snitch",
+    icon: FaMagic,
   },
 
 ];
