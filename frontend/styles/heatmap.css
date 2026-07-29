@@ -1,0 +1,11 @@
+.react-calendar-heatmap .color-empty {
+  fill: #e5e7eb;
+}
+
+.react-calendar-heatmap .color-github {
+  fill: #22c55e;
+}
+
+.react-calendar-heatmap .color-github:hover {
+  stroke: #16a34a;
+}
