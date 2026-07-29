@@ -17,14 +17,62 @@ const Profile = () => {
 
 
 
-  const activityValues = user?.activity?.map((item) => ({
-    date: item.date,
-    count: 1,
-  })) || [];
+  const completedGoals = goals.filter(
+    (goal) => goal.status === "Completed"
+  ).length;
+
+
+
+  const achievements = [
+    {
+      title: "First Step",
+      icon: "🌱",
+      unlocked: completedGoals >= 1,
+    },
+
+    {
+      title: "Week Warrior",
+      icon: "🔥",
+      unlocked: user?.streak >= 7,
+    },
+
+    {
+      title: "Month Master",
+      icon: "🏆",
+      unlocked: user?.streak >= 30,
+    },
+
+    {
+      title: "Goal Crusher",
+      icon: "🎯",
+      unlocked: completedGoals >= 10,
+    },
+
+    {
+      title: "Consistency King",
+      icon: "⭐",
+      unlocked: user?.streak >= 60,
+    },
+  ];
+
+
+
+  const unlockedBadges = achievements.filter(
+    (badge) => badge.unlocked
+  );
+
+
+
+  const activityValues =
+    user?.activity?.map((item) => ({
+      date: item.date,
+      count: 1,
+    })) || [];
 
 
 
   return (
+
     <div className="min-h-screen bg-slate-100 p-4 dark:bg-slate-950">
 
 
@@ -37,9 +85,14 @@ const Profile = () => {
           onClick={() => navigate("/dashboard")}
           className="flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 font-medium text-white transition hover:bg-blue-700"
         >
+
           <FaArrowLeft />
+
           Back to Dashboard
+
         </button>
+
+
 
 
 
@@ -76,6 +129,9 @@ const Profile = () => {
 
 
         </div>
+
+
+
 
 
 
@@ -140,6 +196,75 @@ const Profile = () => {
 
 
 
+
+
+        {/* Achievements */}
+        <div className="rounded-3xl bg-white p-8 shadow-lg dark:bg-slate-900">
+
+
+          <h2 className="mb-6 text-2xl font-bold text-slate-800 dark:text-white">
+            🏆 Achievements
+          </h2>
+
+
+
+          {
+            unlockedBadges.length === 0 ? (
+
+              <p className="text-slate-500 dark:text-slate-400">
+                Complete goals and maintain streaks to unlock badges.
+              </p>
+
+            ) : (
+
+
+              <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+
+
+                {unlockedBadges.map((badge) => (
+
+                  <div
+                    key={badge.title}
+                    className="rounded-2xl bg-green-50 p-5 text-center dark:bg-green-900/20"
+                  >
+
+                    <div className="text-4xl">
+                      {badge.icon}
+                    </div>
+
+
+                    <h3 className="mt-3 font-bold text-slate-800 dark:text-white">
+                      {badge.title}
+                    </h3>
+
+
+                    <span className="mt-3 inline-block rounded-full bg-green-600 px-3 py-1 text-xs font-semibold text-white">
+                      Unlocked ✓
+                    </span>
+
+
+                  </div>
+
+                ))}
+
+
+              </div>
+
+
+            )
+          }
+
+
+        </div>
+
+
+
+
+
+
+
+
+
         {/* Activity Heatmap */}
         <div className="rounded-3xl bg-white p-8 shadow-lg dark:bg-slate-900">
 
@@ -150,30 +275,38 @@ const Profile = () => {
 
 
 
-          <CalendarHeatmap
+          <div className="heatmap-container">
 
-            startDate={
-              new Date(
-                new Date().setFullYear(
-                  new Date().getFullYear() - 1
+
+            <CalendarHeatmap
+
+              startDate={
+                new Date(
+                  new Date().setFullYear(
+                    new Date().getFullYear() - 1
+                  )
                 )
-              )
-            }
-
-            endDate={new Date()}
-
-            values={activityValues}
-
-            classForValue={(value) => {
-
-              if (!value) {
-                return "color-empty";
               }
 
-              return "color-github";
-            }}
+              endDate={new Date()}
 
-          />
+              values={activityValues}
+
+
+              classForValue={(value) => {
+
+                if (!value) {
+                  return "color-empty";
+                }
+
+                return "color-github";
+
+              }}
+
+            />
+
+
+          </div>
 
 
         </div>
@@ -184,6 +317,7 @@ const Profile = () => {
 
 
     </div>
+
   );
 };
 

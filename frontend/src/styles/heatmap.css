@@ -1,3 +1,4 @@
+/* Light mode */
 .react-calendar-heatmap .color-empty {
   fill: #e5e7eb;
 }
@@ -8,4 +9,41 @@
 
 .react-calendar-heatmap .color-github:hover {
   stroke: #16a34a;
+}
+
+
+/* Dark mode */
+.dark .react-calendar-heatmap .color-empty {
+  fill: #334155;
+}
+
+.dark .react-calendar-heatmap .color-github {
+  fill: #22c55e;
+}
+
+.dark .react-calendar-heatmap .color-github:hover {
+  stroke: #4ade80;
+}
+
+
+/* Month and weekday text */
+.react-calendar-heatmap text {
+  fill: #64748b;
+}
+
+.dark .react-calendar-heatmap text {
+  fill: #94a3b8;
+}
+
+
+/* Better spacing */
+.react-calendar-heatmap rect {
+  rx: 3;
+  ry: 3;
+}
+
+
+/* Hover effect */
+.react-calendar-heatmap rect:hover {
+  stroke-width: 2;
 }
