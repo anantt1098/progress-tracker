@@ -4,6 +4,7 @@ import {
   FaUserCircle,
   FaMoon,
   FaSun,
+  FaUser,
 } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
@@ -87,6 +88,24 @@ const Navbar = () => {
 
 
 
+        {/* Profile Button */}
+        <button
+          onClick={() => navigate("/profile")}
+          className="flex items-center gap-2 rounded-lg bg-blue-600 px-3 py-2 text-sm font-medium text-white transition hover:bg-blue-700 sm:px-4 sm:text-base"
+        >
+
+          <FaUser />
+
+          <span className="hidden sm:inline">
+            Profile
+          </span>
+
+        </button>
+
+
+
+
+
         {/* User */}
         <div className="flex items-center gap-2 sm:gap-3">
 
@@ -100,6 +119,8 @@ const Navbar = () => {
             )}
 
           </div>
+
+
 
 
 

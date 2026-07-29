@@ -1,5 +1,6 @@
 const trackModel = require("../models/track.model");
 const userModel = require("../models/user.model");
+
 // Create Track
 async function createTrack(req, res) {
   try {
@@ -34,6 +35,7 @@ async function createTrack(req, res) {
   }
 }
 
+
 // Get All Tracks
 async function getAllTracks(req, res) {
   try {
@@ -52,6 +54,7 @@ async function getAllTracks(req, res) {
     });
   }
 }
+
 
 // Get Single Track
 async function getTrackById(req, res) {
@@ -74,6 +77,7 @@ async function getTrackById(req, res) {
       ),
       remainingDays: track.duration - track.completedDays,
     });
+
   } catch (error) {
     console.error(error);
 
@@ -82,6 +86,7 @@ async function getTrackById(req, res) {
     });
   }
 }
+
 
 // Update Track
 async function updateTrack(req, res) {
@@ -103,12 +108,12 @@ async function updateTrack(req, res) {
     if (description !== undefined) track.description = description;
     if (duration !== undefined) track.duration = duration;
 
-    // Prevent completedDays from exceeding duration
+
     if (track.completedDays > track.duration) {
       track.completedDays = track.duration;
     }
 
-    // Update status automatically
+
     if (track.completedDays === 0) {
       track.status = "Not Started";
     } else if (track.completedDays < track.duration) {
@@ -117,12 +122,14 @@ async function updateTrack(req, res) {
       track.status = "Completed";
     }
 
+
     await track.save();
 
     return res.status(200).json({
       message: "Track updated successfully.",
       track,
     });
+
   } catch (error) {
     console.error(error);
 
@@ -132,13 +139,16 @@ async function updateTrack(req, res) {
   }
 }
 
+
 // Daily Progress Update
 async function updateDailyProgress(req, res) {
   try {
+
     const track = await trackModel.findOne({
       _id: req.params.id,
       userId: req.user._id,
     });
+
 
     if (!track) {
       return res.status(404).json({
@@ -146,8 +156,9 @@ async function updateDailyProgress(req, res) {
       });
     }
 
-    // Prevent updating the same goal twice in one day
+
     const todayString = new Date().toDateString();
+
 
     if (
       track.lastUpdated &&
@@ -158,17 +169,22 @@ async function updateDailyProgress(req, res) {
       });
     }
 
+
     if (track.completedDays >= track.duration) {
       return res.status(400).json({
         message: "Track already completed.",
       });
     }
 
+
+
     // Update track progress
+
     track.completedDays += 1;
     track.lastUpdated = new Date();
 
-    // Update track status
+
+
     if (track.completedDays === 0) {
       track.status = "Not Started";
     } else if (track.completedDays < track.duration) {
@@ -177,10 +193,16 @@ async function updateDailyProgress(req, res) {
       track.status = "Completed";
     }
 
+
+
+
+
     // ==========================
     // Update User Streak
     // ==========================
+
     const user = await userModel.findById(req.user._id);
+
 
     if (!user) {
       return res.status(404).json({
@@ -188,62 +210,131 @@ async function updateDailyProgress(req, res) {
       });
     }
 
+
+
     const today = new Date();
+
     today.setHours(0, 0, 0, 0);
 
+
+
     if (!user.lastActivityDate) {
+
       user.streak = 1;
+
     } else {
+
       const lastDate = new Date(user.lastActivityDate);
+
       lastDate.setHours(0, 0, 0, 0);
 
+
       const diffDays = Math.floor(
-        (today - lastDate) / (1000 * 60 * 60 * 24)
+        (today - lastDate) /
+        (1000 * 60 * 60 * 24)
       );
 
+
       if (diffDays === 0) {
-        // Already counted today, don't increase streak
+
+        // Already counted today
+
       } else if (diffDays === 1) {
+
         user.streak += 1;
+
       } else {
-        // Missed one or more days
+
         user.streak = 1;
+
       }
+
     }
 
+
+
     user.lastActivityDate = new Date();
+
+
 
     if (user.streak > user.bestStreak) {
       user.bestStreak = user.streak;
     }
 
+
+
+    // ==========================
+    // Save Activity History
+    // ==========================
+
+    if (!user.activity) {
+      user.activity = [];
+    }
+
+
+    const alreadyCompletedToday = user.activity.some(
+      (item) =>
+        new Date(item.date).toDateString() ===
+        today.toDateString()
+    );
+
+
+    if (!alreadyCompletedToday) {
+
+      user.activity.push({
+        date: today,
+      });
+
+    }
+
+
+
     await track.save();
+
     await user.save();
 
+
+
     return res.status(200).json({
+
       message: "Progress updated successfully.",
+
       track,
+
       percentage: Math.round(
         (track.completedDays / track.duration) * 100
       ),
-      remainingDays: track.duration - track.completedDays,
+
+      remainingDays:
+        track.duration - track.completedDays,
+
     });
+
+
+
   } catch (error) {
+
     console.error(error);
+
 
     return res.status(500).json({
       message: "Internal Server Error",
     });
+
   }
 }
+
+
 
 // Delete Track
 async function deleteTrack(req, res) {
   try {
+
     const track = await trackModel.findOneAndDelete({
       _id: req.params.id,
       userId: req.user._id,
     });
+
 
     if (!track) {
       return res.status(404).json({
@@ -251,17 +342,25 @@ async function deleteTrack(req, res) {
       });
     }
 
+
     return res.status(200).json({
       message: "Track deleted successfully.",
     });
+
+
   } catch (error) {
+
     console.error(error);
+
 
     return res.status(500).json({
       message: "Internal Server Error",
     });
+
   }
 }
+
+
 
 module.exports = {
   createTrack,
