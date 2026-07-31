@@ -9,7 +9,10 @@ const app = express();
 
 app.use(
   cors({
-    origin: "https://progress-tracker-zeta-teal.vercel.app",
+    origin: [
+      "https://progress-tracker-zeta-teal.vercel.app",
+      "https://localhost",
+    ],
     credentials: true,
   })
 );
