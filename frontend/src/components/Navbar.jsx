@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 
 import {
-  FaSignOutAlt,
   FaUserCircle,
   FaMoon,
   FaSun,
@@ -19,12 +18,10 @@ import { avatars } from "../data/avatars";
 const Navbar = ({ setSidebarOpen }) => {
 
 
-  const { user, logout } = useAuth();
+  const { user } = useAuth();
 
   const navigate = useNavigate();
 
-
-  const [loading, setLoading] = useState(false);
 
 
 
@@ -37,6 +34,7 @@ const Navbar = ({ setSidebarOpen }) => {
   const [selectedAvatar, setSelectedAvatar] = useState(
     localStorage.getItem("avatar") || null
   );
+
 
 
 
@@ -71,6 +69,7 @@ const Navbar = ({ setSidebarOpen }) => {
 
 
   }, []);
+
 
 
 
@@ -134,48 +133,6 @@ const Navbar = ({ setSidebarOpen }) => {
         "theme",
         "light"
       );
-
-
-    }
-
-
-  };
-
-
-
-
-
-
-
-
-
-  const handleLogout = async () => {
-
-
-    if(loading) return;
-
-
-    setLoading(true);
-
-
-
-    try{
-
-
-      await logout();
-
-
-      navigate("/",{
-        replace:true,
-      });
-
-
-    }
-
-    finally{
-
-
-      setLoading(false);
 
 
     }
@@ -260,7 +217,6 @@ const Navbar = ({ setSidebarOpen }) => {
 
 
         </button>
-
 
 
 
@@ -411,7 +367,6 @@ const Navbar = ({ setSidebarOpen }) => {
 
               :
 
-
               user?.username
 
               ?
@@ -422,7 +377,6 @@ const Navbar = ({ setSidebarOpen }) => {
 
 
               :
-
 
               <FaUserCircle/>
 
@@ -500,64 +454,6 @@ const Navbar = ({ setSidebarOpen }) => {
           <span className="hidden sm:inline">
 
             Profile
-
-          </span>
-
-
-        </button>
-
-
-
-
-
-
-
-
-
-        {/* Logout */}
-
-        <button
-
-          onClick={handleLogout}
-
-          disabled={loading}
-
-
-          className="
-          flex
-          items-center
-          gap-2
-          rounded-lg
-          bg-red-500
-          px-3
-          py-2
-          text-sm
-          font-medium
-          text-white
-          transition
-          hover:bg-red-600
-
-          disabled:opacity-60
-
-          sm:px-4
-          sm:text-base
-          "
-
-        >
-
-
-          <FaSignOutAlt/>
-
-
-          <span className="hidden sm:inline">
-
-            {
-              loading
-              ?
-              "Logging out..."
-              :
-              "Logout"
-            }
 
           </span>
 

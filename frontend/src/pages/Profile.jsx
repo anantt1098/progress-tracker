@@ -292,46 +292,6 @@ const Profile = () => {
 
 
 
-            {/* Logout Button */}
-
-            <button
-
-              onClick={handleLogout}
-
-              disabled={loggingOut}
-
-              className="
-              mt-5
-              flex
-              items-center
-              gap-2
-              rounded-lg
-              bg-red-500
-              px-5
-              py-2
-              font-medium
-              text-white
-              transition
-              hover:bg-red-600
-              disabled:cursor-not-allowed
-              disabled:opacity-60
-              "
-
-            >
-
-              <FaSignOutAlt />
-
-              {
-                loggingOut
-                ?
-                "Logging out..."
-                :
-                "Logout"
-              }
-
-
-            </button>
-
             {/* Avatar Selector */}
 
             <div className="mt-8 w-full">
@@ -429,15 +389,6 @@ const Profile = () => {
 
 
         </div>
-
-
-
-
-
-
-
-
-
         {/* Stats */}
 
 
@@ -731,6 +682,61 @@ const Profile = () => {
 
           </div>
 
+
+
+        </div>
+
+
+
+
+
+
+
+
+        {/* Logout Button */}
+
+
+        <div className="flex justify-end">
+
+
+          <button
+
+            onClick={handleLogout}
+
+            disabled={loggingOut}
+
+            className="
+            flex
+            items-center
+            gap-2
+            rounded-lg
+            bg-red-500
+            px-6
+            py-3
+            font-medium
+            text-white
+            transition
+            hover:bg-red-600
+            disabled:cursor-not-allowed
+            disabled:opacity-60
+            "
+
+          >
+
+
+            <FaSignOutAlt />
+
+
+            {
+              loggingOut
+              ?
+              "Logging out..."
+              :
+              "Logout"
+            }
+
+
+          </button>
 
 
         </div>
