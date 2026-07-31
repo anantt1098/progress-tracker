@@ -1,10 +1,15 @@
 import { useOutletContext } from "react-router-dom";
+import { Capacitor } from "@capacitor/core";
 
 import GoalProgressCard from "../components/GoalProgressCard";
 
 
 
 const Dashboard = () => {
+
+
+  const isApp = Capacitor.isNativePlatform();
+
 
 
   const {
@@ -165,89 +170,89 @@ const Dashboard = () => {
 
 
 
+      {
+        !isApp && (
+
+          <div
+            className="
+            flex
+            flex-col
+            items-center
+            justify-between
+            gap-4
+            rounded-3xl
+            bg-white
+            p-5
+            shadow-lg
+            sm:flex-row
+            sm:p-6
+            dark:bg-slate-900
+            "
+          >
 
 
-      {/* Download Android App */}
-
-      <div
-        className="
-        flex
-        flex-col
-        items-center
-        justify-between
-        gap-4
-        rounded-3xl
-        bg-white
-        p-5
-        shadow-lg
-        sm:flex-row
-        sm:p-6
-        dark:bg-slate-900
-        "
-      >
+            <div>
 
 
-        <div>
+              <h2 className="
+              text-xl
+              font-bold
+              text-slate-800
+              dark:text-white
+              ">
 
+                📱 Get ProgressHub Android App
 
-          <h2 className="
-          text-xl
-          font-bold
-          text-slate-800
-          dark:text-white
-          ">
-
-            📱 Get ProgressHub Android App
-
-          </h2>
-
-
-
-          <p className="
-          mt-2
-          text-sm
-          text-slate-500
-          dark:text-slate-400
-          ">
-
-            Track your goals anywhere with the mobile app.
-
-          </p>
-
-
-        </div>
+              </h2>
 
 
 
+              <p className="
+              mt-2
+              text-sm
+              text-slate-500
+              dark:text-slate-400
+              ">
 
-        <a
+                Track your goals anywhere with the mobile app.
 
-          href="/downloads/ProgressHub.apk"
+              </p>
 
-          download="ProgressHub.apk"
 
-          className="
-          rounded-lg
-          bg-green-600
-          px-5
-          py-3
-          font-semibold
-          text-white
-          transition
-          hover:bg-green-700
-          "
-
-        >
-
-          Download APK
-
-        </a>
+            </div>
 
 
 
-      </div>
+
+            <a
+
+              href="/downloads/ProgressHub.apk"
+
+              download="ProgressHub.apk"
+
+              className="
+              rounded-lg
+              bg-green-600
+              px-5
+              py-3
+              font-semibold
+              text-white
+              transition
+              hover:bg-green-700
+              "
+
+            >
+
+              Download APK
+
+            </a>
 
 
+
+          </div>
+
+        )
+      }
 
 
 
