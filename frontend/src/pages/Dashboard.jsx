@@ -1,5 +1,7 @@
 import { useOutletContext } from "react-router-dom";
+
 import GoalProgressCard from "../components/GoalProgressCard";
+
 
 
 const Dashboard = () => {
@@ -16,13 +18,19 @@ const Dashboard = () => {
 
 
 
+
+
   if (loading) {
+
 
     return (
 
+
       <div className="flex min-h-screen items-center justify-center dark:bg-slate-950">
 
+
         <div className="text-center">
+
 
           <div className="
           mx-auto
@@ -36,17 +44,25 @@ const Dashboard = () => {
           border-t-transparent
           " />
 
+
           <p className="text-lg font-medium text-gray-600 dark:text-slate-300">
+
             Loading your goals...
+
           </p>
+
 
         </div>
 
+
       </div>
+
 
     );
 
+
   }
+
 
 
 
@@ -151,6 +167,92 @@ const Dashboard = () => {
 
 
 
+      {/* Download Android App */}
+
+      <div
+        className="
+        flex
+        flex-col
+        items-center
+        justify-between
+        gap-4
+        rounded-3xl
+        bg-white
+        p-5
+        shadow-lg
+        sm:flex-row
+        sm:p-6
+        dark:bg-slate-900
+        "
+      >
+
+
+        <div>
+
+
+          <h2 className="
+          text-xl
+          font-bold
+          text-slate-800
+          dark:text-white
+          ">
+
+            📱 Get ProgressHub Android App
+
+          </h2>
+
+
+
+          <p className="
+          mt-2
+          text-sm
+          text-slate-500
+          dark:text-slate-400
+          ">
+
+            Track your goals anywhere with the mobile app.
+
+          </p>
+
+
+        </div>
+
+
+
+
+        <a
+
+          href="/downloads/ProgressHub.apk"
+
+          download="ProgressHub.apk"
+
+          className="
+          rounded-lg
+          bg-green-600
+          px-5
+          py-3
+          font-semibold
+          text-white
+          transition
+          hover:bg-green-700
+          "
+
+        >
+
+          Download APK
+
+        </a>
+
+
+
+      </div>
+
+
+
+
+
+
+
       {/* Header */}
 
       <div className="
@@ -166,25 +268,20 @@ const Dashboard = () => {
 
 
         <h1 className="text-2xl font-bold sm:text-4xl">
+
           Daily Progress Dashboard 🚀
+
         </h1>
 
 
         <p className="mt-3 text-blue-100">
+
           Stay consistent. Complete one step every day and build your streak.
+
         </p>
 
 
       </div>
-
-
-
-
-
-
-
-
-
       {/* Empty User Guide */}
 
       {
@@ -208,7 +305,9 @@ const Dashboard = () => {
 
 
             <h2 className="text-lg font-bold">
+
               🎯 Start Your First Goal
+
             </h2>
 
 
@@ -250,14 +349,20 @@ const Dashboard = () => {
 
         <div className="rounded-2xl bg-white p-4 shadow-md sm:p-6 dark:bg-slate-800">
 
+
           <p className="text-gray-500 dark:text-slate-300">
+
             Total Goals
+
           </p>
 
 
           <h2 className="mt-3 text-4xl font-bold text-blue-600">
+
             {totalGoals}
+
           </h2>
+
 
         </div>
 
@@ -266,16 +371,23 @@ const Dashboard = () => {
 
 
 
+
         <div className="rounded-2xl bg-white p-4 shadow-md sm:p-6 dark:bg-slate-800">
 
+
           <p className="text-gray-500 dark:text-slate-300">
+
             Completed
+
           </p>
 
 
           <h2 className="mt-3 text-4xl font-bold text-green-600">
+
             {completedGoals}
+
           </h2>
+
 
         </div>
 
@@ -284,16 +396,23 @@ const Dashboard = () => {
 
 
 
+
         <div className="rounded-2xl bg-white p-4 shadow-md sm:p-6 dark:bg-slate-800">
 
+
           <p className="text-gray-500 dark:text-slate-300">
+
             In Progress
+
           </p>
 
 
           <h2 className="mt-3 text-4xl font-bold text-blue-600">
+
             {inProgressGoals}
+
           </h2>
+
 
         </div>
 
@@ -307,12 +426,16 @@ const Dashboard = () => {
 
 
           <p className="text-gray-500 dark:text-slate-300">
+
             🔥 Current Streak
+
           </p>
 
 
           <h2 className="mt-3 text-4xl font-bold text-orange-500">
+
             {user?.streak || 0}
+
           </h2>
 
 
@@ -353,12 +476,16 @@ const Dashboard = () => {
 
 
             <h2 className="text-xl font-bold text-gray-800 sm:text-2xl dark:text-white">
+
               Your Goals
+
             </h2>
 
 
             <p className="text-gray-500 dark:text-slate-400">
+
               Click the progress circle or button once every day to update your progress.
+
             </p>
 
 
@@ -378,7 +505,9 @@ const Dashboard = () => {
           dark:text-blue-200
           ">
 
+
             {totalGoals} Goals
+
 
           </div>
 
@@ -407,12 +536,16 @@ const Dashboard = () => {
 
 
               <div className="text-6xl">
+
                 🎯
+
               </div>
 
 
               <h2 className="mt-4 text-2xl font-bold dark:text-white">
+
                 No Goals Yet
+
               </h2>
 
 
@@ -463,19 +596,6 @@ const Dashboard = () => {
 
 
       </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
       {/* Achievement Badges */}
 
       <div className="
@@ -538,12 +658,19 @@ const Dashboard = () => {
 
 
                 <div className="text-4xl">
+
                   {badge.icon}
+
                 </div>
 
 
 
-                <h3 className="mt-3 font-bold text-slate-800 dark:text-white">
+                <h3 className="
+                mt-3
+                font-bold
+                text-slate-800
+                dark:text-white
+                ">
 
                   {badge.title}
 
@@ -551,7 +678,12 @@ const Dashboard = () => {
 
 
 
-                <p className="mt-2 text-sm text-gray-500 dark:text-slate-400">
+                <p className="
+                mt-2
+                text-sm
+                text-gray-500
+                dark:text-slate-400
+                ">
 
                   {badge.description}
 
@@ -603,9 +735,6 @@ const Dashboard = () => {
 
 
 
-
-
-
       {/* Summary */}
 
 
@@ -627,7 +756,9 @@ const Dashboard = () => {
 
 
             <h2 className="text-xl font-bold sm:text-2xl">
+
               Progress Summary
+
             </h2>
 
 
@@ -639,12 +770,16 @@ const Dashboard = () => {
               <div>
 
                 <p className="text-green-100">
+
                   Not Started
+
                 </p>
 
 
                 <h3 className="text-3xl font-bold">
+
                   {notStartedGoals}
+
                 </h3>
 
               </div>
@@ -656,12 +791,16 @@ const Dashboard = () => {
               <div>
 
                 <p className="text-green-100">
+
                   In Progress
+
                 </p>
 
 
                 <h3 className="text-3xl font-bold">
+
                   {inProgressGoals}
+
                 </h3>
 
               </div>
@@ -671,15 +810,20 @@ const Dashboard = () => {
 
 
 
+
               <div>
 
                 <p className="text-green-100">
+
                   Completed
+
                 </p>
 
 
                 <h3 className="text-3xl font-bold">
+
                   {completedGoals}
+
                 </h3>
 
               </div>
