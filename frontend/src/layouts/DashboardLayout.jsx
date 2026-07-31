@@ -7,12 +7,10 @@ import {
   FaInstagram,
 } from "react-icons/fa";
 
-
 import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
 import AddGoalModal from "../components/AddGoalModal";
 import useGoals from "../hooks/useGoals";
-
 
 
 
@@ -48,6 +46,7 @@ const DashboardLayout = () => {
   const handleAddGoal = () => {
 
     setSelectedGoal(null);
+
     setIsModalOpen(true);
 
   };
@@ -61,6 +60,7 @@ const DashboardLayout = () => {
   const handleEditGoal = (goal) => {
 
     setSelectedGoal(goal);
+
     setIsModalOpen(true);
 
   };
@@ -74,10 +74,10 @@ const DashboardLayout = () => {
   const handleCloseModal = () => {
 
     setSelectedGoal(null);
+
     setIsModalOpen(false);
 
   };
-
 
 
 
@@ -111,18 +111,19 @@ const DashboardLayout = () => {
 
   return (
 
-
     <div className="min-h-screen bg-slate-100 dark:bg-slate-950">
 
 
 
 
 
+      {/* Navbar */}
 
-      <Navbar 
+      <Navbar
+
         setSidebarOpen={setSidebarOpen}
-      />
 
+      />
 
 
 
@@ -139,8 +140,10 @@ const DashboardLayout = () => {
 
 
 
+        {/* Sidebar */}
 
         <Sidebar
+
 
           goals={goals}
 
@@ -157,6 +160,7 @@ const DashboardLayout = () => {
 
           setIsOpen={setSidebarOpen}
 
+
         />
 
 
@@ -167,8 +171,7 @@ const DashboardLayout = () => {
 
 
 
-
-
+        {/* Main Content */}
 
         <div className="flex min-h-[calc(100vh-73px)] flex-1 flex-col">
 
@@ -177,8 +180,8 @@ const DashboardLayout = () => {
 
 
 
-
           <main
+
             className="
             flex-1
             bg-slate-100
@@ -186,22 +189,27 @@ const DashboardLayout = () => {
             sm:p-8
             dark:bg-slate-950
             "
-          >
 
+          >
 
 
             <Outlet
 
               context={{
+
                 user,
+
                 goals,
+
                 loading,
+
                 fetchGoals,
+
                 updateDailyProgress,
+
               }}
 
             />
-
 
 
           </main>
@@ -214,11 +222,7 @@ const DashboardLayout = () => {
 
 
 
-
-
-
           {/* Footer */}
-
 
           <footer
 
@@ -235,7 +239,6 @@ const DashboardLayout = () => {
 
 
 
-
             <div
 
               className="
@@ -248,9 +251,6 @@ const DashboardLayout = () => {
               "
 
             >
-
-
-
 
 
 
@@ -281,11 +281,7 @@ const DashboardLayout = () => {
 
 
 
-
               <div className="flex gap-4">
-
-
-
 
 
                 <a
@@ -316,9 +312,6 @@ const DashboardLayout = () => {
                   <FaGithub />
 
                 </a>
-
-
-
 
 
 
@@ -360,8 +353,6 @@ const DashboardLayout = () => {
 
 
 
-
-
                 <a
 
                   href="https://www.instagram.com/_anantt_/"
@@ -393,17 +384,11 @@ const DashboardLayout = () => {
 
 
 
-
-
               </div>
 
 
 
-
-
             </div>
-
-
 
 
 
@@ -430,9 +415,7 @@ const DashboardLayout = () => {
 
 
 
-
           </footer>
-
 
 
 
@@ -456,15 +439,21 @@ const DashboardLayout = () => {
 
       <AddGoalModal
 
+
         isOpen={isModalOpen}
+
 
         onClose={handleCloseModal}
 
+
         editGoal={selectedGoal}
+
 
         createGoal={createGoal}
 
+
         updateGoal={updateGoal}
+
 
       />
 
@@ -474,10 +463,10 @@ const DashboardLayout = () => {
 
     </div>
 
-
   );
 
 };
+
 
 
 export default DashboardLayout;

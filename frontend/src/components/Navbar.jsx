@@ -15,6 +15,7 @@ import { useAuth } from "../context/AuthContext";
 import { avatars } from "../data/avatars";
 
 
+
 const Navbar = ({ setSidebarOpen }) => {
 
 
@@ -40,7 +41,9 @@ const Navbar = ({ setSidebarOpen }) => {
 
 
 
+
   useEffect(() => {
+
 
     const updateAvatar = () => {
 
@@ -91,20 +94,25 @@ const Navbar = ({ setSidebarOpen }) => {
 
 
 
+
+
   const toggleDarkMode = () => {
 
 
     const newMode = !darkMode;
 
+
     setDarkMode(newMode);
 
 
 
-    if (newMode) {
+    if(newMode){
+
 
       document.documentElement.classList.add(
         "dark"
       );
+
 
       localStorage.setItem(
         "theme",
@@ -112,7 +120,9 @@ const Navbar = ({ setSidebarOpen }) => {
       );
 
 
-    } else {
+    }
+
+    else{
 
 
       document.documentElement.classList.remove(
@@ -142,26 +152,27 @@ const Navbar = ({ setSidebarOpen }) => {
   const handleLogout = async () => {
 
 
-    if (loading) return;
+    if(loading) return;
 
 
     setLoading(true);
 
 
 
-    try {
+    try{
 
 
       await logout();
 
 
-      navigate("/", {
+      navigate("/",{
         replace:true,
       });
 
 
+    }
 
-    } finally {
+    finally{
 
 
       setLoading(false);
@@ -183,6 +194,7 @@ const Navbar = ({ setSidebarOpen }) => {
   return (
 
     <header
+
       className="
       fixed
       left-0
@@ -202,16 +214,18 @@ const Navbar = ({ setSidebarOpen }) => {
       dark:border-slate-700
       dark:bg-slate-900
       "
+
     >
 
 
 
 
 
-
-      {/* Logo Section */}
+      {/* Left Section */}
 
       <div className="flex items-center gap-3">
+
+
 
 
 
@@ -219,7 +233,9 @@ const Navbar = ({ setSidebarOpen }) => {
 
         <button
 
-          onClick={() => setSidebarOpen(true)}
+          onClick={() =>
+            setSidebarOpen(prev => !prev)
+          }
 
           className="
           flex
@@ -228,23 +244,24 @@ const Navbar = ({ setSidebarOpen }) => {
           items-center
           justify-center
           rounded-lg
-          bg-slate-200
-          text-slate-700
+          bg-slate-900
+          text-white
+          shadow-md
           transition
-          hover:bg-slate-300
+          hover:bg-slate-700
 
-          dark:bg-slate-800
-          dark:text-white
-          dark:hover:bg-slate-700
-
-          lg:hidden
+          dark:bg-slate-700
+          dark:hover:bg-slate-600
           "
 
         >
 
           <FaBars size={20}/>
 
+
         </button>
+
+
 
 
 
@@ -256,21 +273,41 @@ const Navbar = ({ setSidebarOpen }) => {
         <h1 className="text-xl font-bold sm:text-3xl">
 
 
-          <span className="rounded-md bg-amber-500 px-2 py-1 text-black">
+          <span
+            className="
+            rounded-md
+            bg-amber-500
+            px-2
+            py-1
+            text-black
+            "
+          >
 
             Pro
 
           </span>
 
 
-          <span className="ml-1 rounded-md bg-blue-600 px-2 py-1 text-white">
+
+          <span
+            className="
+            ml-1
+            rounded-md
+            bg-blue-600
+            px-2
+            py-1
+            text-white
+            "
+          >
 
             gressHub
 
           </span>
 
 
+
         </h1>
+
 
 
       </div>
@@ -282,6 +319,8 @@ const Navbar = ({ setSidebarOpen }) => {
 
 
 
+
+      {/* Right Section */}
 
       <div className="flex items-center gap-2 sm:gap-5">
 
@@ -321,13 +360,14 @@ const Navbar = ({ setSidebarOpen }) => {
           {
             darkMode
             ?
-            <FaSun />
+            <FaSun/>
             :
-            <FaMoon />
+            <FaMoon/>
           }
 
 
         </button>
+
 
 
 
@@ -343,6 +383,7 @@ const Navbar = ({ setSidebarOpen }) => {
 
 
           <div
+
             className="
             flex
             h-9
@@ -356,16 +397,20 @@ const Navbar = ({ setSidebarOpen }) => {
             sm:h-10
             sm:w-10
             "
+
           >
 
 
             {
               AvatarIcon
+
               ?
 
               <AvatarIcon size={22}/>
 
+
               :
+
 
               user?.username
 
@@ -375,9 +420,12 @@ const Navbar = ({ setSidebarOpen }) => {
               .charAt(0)
               .toUpperCase()
 
+
               :
 
-              <FaUserCircle />
+
+              <FaUserCircle/>
+
 
             }
 
@@ -405,7 +453,6 @@ const Navbar = ({ setSidebarOpen }) => {
               {user?.email}
 
             </p>
-
 
 
           </div>
@@ -447,10 +494,13 @@ const Navbar = ({ setSidebarOpen }) => {
 
         >
 
-          <FaUser />
+          <FaUser/>
+
 
           <span className="hidden sm:inline">
+
             Profile
+
           </span>
 
 
@@ -471,6 +521,7 @@ const Navbar = ({ setSidebarOpen }) => {
           onClick={handleLogout}
 
           disabled={loading}
+
 
           className="
           flex
@@ -495,7 +546,7 @@ const Navbar = ({ setSidebarOpen }) => {
         >
 
 
-          <FaSignOutAlt />
+          <FaSignOutAlt/>
 
 
           <span className="hidden sm:inline">
@@ -516,7 +567,9 @@ const Navbar = ({ setSidebarOpen }) => {
 
 
 
+
       </div>
+
 
 
 

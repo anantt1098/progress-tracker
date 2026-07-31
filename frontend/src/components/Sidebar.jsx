@@ -26,6 +26,7 @@ const Sidebar = ({
 
 
 
+
   const filteredGoals = useMemo(() => {
 
     return goals.filter((goal) =>
@@ -44,23 +45,39 @@ const Sidebar = ({
 
   const getStatusColor = (status) => {
 
-    switch (status) {
+    switch(status){
 
       case "Completed":
+
         return "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400";
 
 
       case "In Progress":
+
         return "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400";
 
 
       default:
+
         return "bg-gray-100 text-gray-700 dark:bg-slate-800 dark:text-slate-300";
 
     }
 
   };
 
+
+
+
+
+
+
+  const handleAddGoal = () => {
+
+    onAddGoal();
+
+    setIsOpen(false);
+
+  };
 
 
 
@@ -87,7 +104,7 @@ const Sidebar = ({
             inset-0
             z-40
             bg-black/50
-            lg:hidden
+            lg:block
             "
 
           />
@@ -101,44 +118,59 @@ const Sidebar = ({
 
 
 
-
       <aside
 
         className={`
-        
+
         fixed
+
         left-0
+
         top-[73px]
+
         z-50
+
         flex
+
         h-[calc(100vh-73px)]
+
         w-80
+
         flex-col
+
         border-r
+
         bg-white
+
         p-5
+
         shadow-xl
+
         transition-transform
+
         duration-300
 
 
         dark:border-slate-700
+
         dark:bg-slate-900
 
 
-        lg:sticky
-        lg:top-[73px]
-        lg:z-auto
-        lg:shadow-none
-
 
         ${
+
           isOpen
+
           ?
+
           "translate-x-0"
+
           :
-          "-translate-x-full lg:translate-x-0"
+
+          "-translate-x-full"
+
         }
+
 
         `}
 
@@ -150,7 +182,7 @@ const Sidebar = ({
 
 
 
-        {/* Mobile Close */}
+        {/* Close Button */}
 
         <button
 
@@ -166,7 +198,8 @@ const Sidebar = ({
           rounded-lg
           bg-red-500
           text-white
-          lg:hidden
+          transition
+          hover:bg-red-600
           "
 
         >
@@ -183,12 +216,11 @@ const Sidebar = ({
 
 
 
-
         {/* Add Goal */}
 
         <button
 
-          onClick={onAddGoal}
+          onClick={handleAddGoal}
 
           className="
           mb-5
@@ -264,7 +296,6 @@ const Sidebar = ({
             pl-11
             pr-4
             text-slate-800
-            placeholder-slate-400
 
             focus:border-blue-500
             focus:outline-none
@@ -325,46 +356,61 @@ const Sidebar = ({
 
 
 
-
           {
             loading ?
+
 
             (
 
               <p className="text-center text-slate-500">
+
                 Loading goals...
+
               </p>
 
             )
 
+
             :
+
 
             filteredGoals.length === 0 ?
 
+
             (
 
-              <div className="rounded-xl bg-slate-100 p-4 text-center dark:bg-slate-800">
+              <div className="
+              rounded-xl
+              bg-slate-100
+              p-5
+              text-center
+              dark:bg-slate-800
+              ">
 
-                <p className="text-sm text-slate-500 dark:text-slate-400">
 
-                  No goals yet.
+                <p className="text-sm text-slate-600 dark:text-slate-300">
+
+                  🎯 No goals yet
 
                 </p>
+
 
                 <p className="mt-2 text-xs text-slate-400">
 
-                  Click + Add Goal to start.
+                  Click + Add Goal to create your first goal.
 
                 </p>
+
 
               </div>
 
             )
 
+
             :
 
-            filteredGoals.map((goal)=>(
 
+            filteredGoals.map((goal)=>(
 
 
               <div
@@ -390,24 +436,17 @@ const Sidebar = ({
 
 
 
-
                 <div className="flex items-start justify-between gap-3">
 
 
-
-                  <h3
-
-                    className="
-                    truncate
-                    font-semibold
-                    text-slate-800
-                    dark:text-white
-                    "
-
-                  >
+                  <h3 className="
+                  truncate
+                  font-semibold
+                  text-slate-800
+                  dark:text-white
+                  ">
 
                     {goal.title}
-
 
                   </h3>
 
@@ -420,9 +459,7 @@ const Sidebar = ({
 
                     <button
 
-                      onClick={() =>
-                        onEditGoal(goal)
-                      }
+                      onClick={() => onEditGoal(goal)}
 
                       className="text-blue-500 hover:text-blue-700"
 
@@ -438,9 +475,7 @@ const Sidebar = ({
 
                     <button
 
-                      onClick={() =>
-                        onDeleteGoal(goal._id)
-                      }
+                      onClick={() => onDeleteGoal(goal._id)}
 
                       className="text-red-500 hover:text-red-700"
 
@@ -451,9 +486,7 @@ const Sidebar = ({
                     </button>
 
 
-
                   </div>
-
 
 
                 </div>
@@ -468,17 +501,13 @@ const Sidebar = ({
                 {
                   goal.description && (
 
-                    <p
-
-                      className="
-                      mt-2
-                      line-clamp-2
-                      text-sm
-                      text-slate-500
-                      dark:text-slate-400
-                      "
-
-                    >
+                    <p className="
+                    mt-2
+                    line-clamp-2
+                    text-sm
+                    text-slate-500
+                    dark:text-slate-400
+                    ">
 
                       {goal.description}
 
@@ -493,25 +522,19 @@ const Sidebar = ({
 
 
 
-
-
-
-                <div
-
-                  className="
-                  mt-4
-                  flex
-                  items-center
-                  justify-between
-                  "
-
-                >
+                <div className="
+                mt-4
+                flex
+                items-center
+                justify-between
+                ">
 
 
 
                   <span
 
                     className={`
+
                     rounded-full
                     px-3
                     py-1
@@ -519,6 +542,7 @@ const Sidebar = ({
                     font-medium
 
                     ${getStatusColor(goal.status)}
+
                     `}
 
                   >
@@ -538,9 +562,7 @@ const Sidebar = ({
                   </span>
 
 
-
                 </div>
-
 
 
 
@@ -549,17 +571,14 @@ const Sidebar = ({
               </div>
 
 
-
             ))
+
           }
 
 
 
 
-
-
         </div>
-
 
 
 
