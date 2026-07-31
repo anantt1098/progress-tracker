@@ -4,8 +4,6 @@ import {
   FaEdit,
   FaTrash,
   FaSearch,
-  FaChevronLeft,
-  FaChevronRight,
   FaPlus,
   FaTimes,
 } from "react-icons/fa";
@@ -24,8 +22,6 @@ const Sidebar = ({
 
 
   const [search, setSearch] = useState("");
-
-  const [collapsed, setCollapsed] = useState(false);
 
 
 
@@ -77,7 +73,7 @@ const Sidebar = ({
     <>
 
 
-      {/* Mobile Overlay */}
+      {/* Overlay */}
 
       {
         isOpen && (
@@ -116,13 +112,15 @@ const Sidebar = ({
         z-50
         flex
         h-[calc(100vh-73px)]
+        w-80
         flex-col
         border-r
         bg-white
-        p-4
+        p-5
         shadow-xl
-        transition-all
+        transition-transform
         duration-300
+
 
         dark:border-slate-700
         dark:bg-slate-900
@@ -135,71 +133,16 @@ const Sidebar = ({
 
 
         ${
-
           isOpen
-
-          ? "translate-x-0"
-
-          : "-translate-x-full lg:translate-x-0"
-
+          ?
+          "translate-x-0"
+          :
+          "-translate-x-full lg:translate-x-0"
         }
-
-
-        ${
-          collapsed
-          ? "lg:w-20"
-          : "lg:w-96"
-        }
-
-
-        w-80
 
         `}
 
       >
-
-
-
-
-
-
-
-
-        {/* Collapse Button */}
-
-        <button
-
-          onClick={() =>
-            setCollapsed(!collapsed)
-          }
-
-          className="
-          absolute
-          -right-3
-          top-5
-          hidden
-          h-7
-          w-7
-          items-center
-          justify-center
-          rounded-full
-          bg-blue-600
-          text-white
-          lg:flex
-          "
-
-        >
-
-          {
-            collapsed
-            ?
-            <FaChevronRight size={12}/>
-            :
-            <FaChevronLeft size={12}/>
-          }
-
-
-        </button>
 
 
 
@@ -216,11 +159,12 @@ const Sidebar = ({
           className="
           mb-4
           flex
+          h-9
+          w-9
           items-center
           justify-center
           rounded-lg
           bg-red-500
-          p-2
           text-white
           lg:hidden
           "
@@ -265,13 +209,7 @@ const Sidebar = ({
 
           <FaPlus />
 
-          {
-            !collapsed && (
-              <span>
-                Add Goal
-              </span>
-            )
-          }
+          Add Goal
 
 
         </button>
@@ -286,90 +224,60 @@ const Sidebar = ({
 
         {/* Search */}
 
-        {
-          !collapsed && (
-
-            <div className="relative mb-5">
+        <div className="relative mb-5">
 
 
-              <FaSearch
+          <FaSearch
 
-                className="
-                absolute
-                left-4
-                top-1/2
-                -translate-y-1/2
-                text-slate-400
-                "
+            className="
+            absolute
+            left-4
+            top-1/2
+            -translate-y-1/2
+            text-slate-400
+            "
 
-              />
-
-
-              <input
-
-                type="text"
-
-                placeholder="Search goals..."
-
-                value={search}
-
-                onChange={(e)=>
-                  setSearch(e.target.value)
-                }
-
-                className="
-                w-full
-                rounded-xl
-                border
-                border-slate-300
-                bg-white
-                py-3
-                pl-11
-                pr-4
-                text-slate-800
-
-                dark:border-slate-700
-                dark:bg-slate-800
-                dark:text-white
-                "
-
-              />
-
-
-            </div>
-
-          )
-        }
+          />
 
 
 
+          <input
+
+            type="text"
+
+            placeholder="Search goals..."
+
+            value={search}
+
+            onChange={(e)=>
+              setSearch(e.target.value)
+            }
 
 
+            className="
+            w-full
+            rounded-xl
+            border
+            border-slate-300
+            bg-white
+            py-3
+            pl-11
+            pr-4
+            text-slate-800
+            placeholder-slate-400
+
+            focus:border-blue-500
+            focus:outline-none
+
+            dark:border-slate-700
+            dark:bg-slate-800
+            dark:text-white
+            "
+
+          />
 
 
-
-
-        {
-          !collapsed && (
-
-            <h2
-
-              className="
-              mb-3
-              text-lg
-              font-semibold
-              text-slate-700
-              dark:text-slate-200
-              "
-
-            >
-
-              My Goals
-
-            </h2>
-
-          )
-        }
+        </div>
 
 
 
@@ -379,36 +287,77 @@ const Sidebar = ({
 
 
 
-        {/* Goals */}
+        <h2
+
+          className="
+          mb-4
+          text-lg
+          font-bold
+          text-slate-700
+          dark:text-slate-200
+          "
+
+        >
+
+          My Goals
+
+        </h2>
+
+
+
+
+
+
+
+
 
         <div
 
           className="
           flex-1
-          space-y-2
+          space-y-3
           overflow-y-auto
+          pr-1
           "
 
         >
 
 
 
+
+
           {
-            loading ? (
+            loading ?
+
+            (
 
               <p className="text-center text-slate-500">
-                Loading...
+                Loading goals...
               </p>
 
             )
 
             :
 
-            filteredGoals.length === 0 ? (
+            filteredGoals.length === 0 ?
 
-              <p className="text-center text-slate-500">
-                No goals
-              </p>
+            (
+
+              <div className="rounded-xl bg-slate-100 p-4 text-center dark:bg-slate-800">
+
+                <p className="text-sm text-slate-500 dark:text-slate-400">
+
+                  No goals yet.
+
+                </p>
+
+                <p className="mt-2 text-xs text-slate-400">
+
+                  Click + Add Goal to start.
+
+                </p>
+
+              </div>
 
             )
 
@@ -427,7 +376,10 @@ const Sidebar = ({
                 border
                 border-slate-200
                 bg-slate-50
-                p-3
+                p-4
+                shadow-sm
+                transition
+                hover:shadow-md
 
                 dark:border-slate-700
                 dark:bg-slate-800
@@ -437,7 +389,10 @@ const Sidebar = ({
 
 
 
-                <div className="flex justify-between">
+
+
+                <div className="flex items-start justify-between gap-3">
+
 
 
                   <h3
@@ -451,18 +406,7 @@ const Sidebar = ({
 
                   >
 
-                    {
-                      !collapsed
-                      &&
-                      goal.title
-                    }
-
-
-                    {
-                      collapsed
-                      &&
-                      "🎯"
-                    }
+                    {goal.title}
 
 
                   </h3>
@@ -470,47 +414,46 @@ const Sidebar = ({
 
 
 
-                  {
-                    !collapsed && (
 
-                      <div className="flex gap-3">
+                  <div className="flex gap-3">
 
 
-                        <button
+                    <button
 
-                          onClick={() =>
-                            onEditGoal(goal)
-                          }
+                      onClick={() =>
+                        onEditGoal(goal)
+                      }
 
-                          className="text-blue-500"
+                      className="text-blue-500 hover:text-blue-700"
 
-                        >
+                    >
 
-                          <FaEdit size={14}/>
+                      <FaEdit size={14}/>
 
-                        </button>
+                    </button>
 
 
 
-                        <button
-
-                          onClick={() =>
-                            onDeleteGoal(goal._id)
-                          }
-
-                          className="text-red-500"
-
-                        >
-
-                          <FaTrash size={14}/>
-
-                        </button>
 
 
-                      </div>
+                    <button
 
-                    )
-                  }
+                      onClick={() =>
+                        onDeleteGoal(goal._id)
+                      }
+
+                      className="text-red-500 hover:text-red-700"
+
+                    >
+
+                      <FaTrash size={14}/>
+
+                    </button>
+
+
+
+                  </div>
+
 
 
                 </div>
@@ -519,68 +462,27 @@ const Sidebar = ({
 
 
 
+
+
+
                 {
-                  !collapsed && (
+                  goal.description && (
 
-                    <>
+                    <p
 
+                      className="
+                      mt-2
+                      line-clamp-2
+                      text-sm
+                      text-slate-500
+                      dark:text-slate-400
+                      "
 
-                      {
-                        goal.description && (
+                    >
 
-                          <p className="
-                          mt-1
-                          truncate
-                          text-sm
-                          text-slate-500
-                          dark:text-slate-400
-                          ">
+                      {goal.description}
 
-                            {goal.description}
-
-                          </p>
-
-                        )
-                      }
-
-
-
-
-                      <div className="
-                      mt-3
-                      flex
-                      justify-between
-                      ">
-
-
-                        <span
-
-                          className={`
-                          rounded-full
-                          px-3
-                          py-1
-                          text-xs
-                          ${getStatusColor(goal.status)}
-                          `}
-
-                        >
-
-                          {goal.status}
-
-                        </span>
-
-
-                        <span className="text-sm text-slate-500">
-
-                          {goal.duration}d
-
-                        </span>
-
-
-                      </div>
-
-
-                    </>
+                    </p>
 
                   )
                 }
@@ -588,11 +490,71 @@ const Sidebar = ({
 
 
 
+
+
+
+
+
+
+                <div
+
+                  className="
+                  mt-4
+                  flex
+                  items-center
+                  justify-between
+                  "
+
+                >
+
+
+
+                  <span
+
+                    className={`
+                    rounded-full
+                    px-3
+                    py-1
+                    text-xs
+                    font-medium
+
+                    ${getStatusColor(goal.status)}
+                    `}
+
+                  >
+
+                    {goal.status}
+
+                  </span>
+
+
+
+
+
+                  <span className="text-sm text-slate-500">
+
+                    {goal.duration}d
+
+                  </span>
+
+
+
+                </div>
+
+
+
+
+
+
               </div>
+
 
 
             ))
           }
+
+
+
 
 
 

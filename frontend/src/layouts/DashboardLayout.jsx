@@ -5,7 +5,6 @@ import {
   FaGithub,
   FaLinkedin,
   FaInstagram,
-  FaBars,
 } from "react-icons/fa";
 
 
@@ -13,6 +12,7 @@ import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
 import AddGoalModal from "../components/AddGoalModal";
 import useGoals from "../hooks/useGoals";
+
 
 
 
@@ -33,11 +33,13 @@ const DashboardLayout = () => {
 
 
 
+
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [selectedGoal, setSelectedGoal] = useState(null);
 
   const [sidebarOpen, setSidebarOpen] = useState(false);
+
 
 
 
@@ -54,6 +56,8 @@ const DashboardLayout = () => {
 
 
 
+
+
   const handleEditGoal = (goal) => {
 
     setSelectedGoal(goal);
@@ -65,12 +69,17 @@ const DashboardLayout = () => {
 
 
 
+
+
   const handleCloseModal = () => {
 
     setSelectedGoal(null);
     setIsModalOpen(false);
 
   };
+
+
+
 
 
 
@@ -99,6 +108,7 @@ const DashboardLayout = () => {
 
 
 
+
   return (
 
 
@@ -106,45 +116,12 @@ const DashboardLayout = () => {
 
 
 
-      <Navbar />
 
 
 
-
-
-
-      {/* Mobile Sidebar Button */}
-
-      <button
-
-        onClick={() => setSidebarOpen(true)}
-
-        className="
-        fixed
-        left-4
-        top-[90px]
-        z-50
-        flex
-        h-12
-        w-12
-        items-center
-        justify-center
-        rounded-xl
-        bg-slate-900
-        text-white
-        shadow-xl
-        ring-2
-        ring-blue-500
-        transition
-        hover:bg-slate-800
-        lg:hidden
-        "
-
-      >
-
-        <FaBars size={22}/>
-
-      </button>
+      <Navbar 
+        setSidebarOpen={setSidebarOpen}
+      />
 
 
 
@@ -155,6 +132,9 @@ const DashboardLayout = () => {
 
 
       <div className="flex pt-[73px]">
+
+
+
 
 
 
@@ -187,7 +167,11 @@ const DashboardLayout = () => {
 
 
 
+
+
+
         <div className="flex min-h-[calc(100vh-73px)] flex-1 flex-col">
+
 
 
 
@@ -199,12 +183,11 @@ const DashboardLayout = () => {
             flex-1
             bg-slate-100
             p-3
-            pt-16
             sm:p-8
-            sm:pt-8
             dark:bg-slate-950
             "
           >
+
 
 
             <Outlet
@@ -220,7 +203,11 @@ const DashboardLayout = () => {
             />
 
 
+
           </main>
+
+
+
 
 
 
@@ -232,7 +219,9 @@ const DashboardLayout = () => {
 
           {/* Footer */}
 
+
           <footer
+
             className="
             border-t
             bg-white
@@ -241,11 +230,14 @@ const DashboardLayout = () => {
             dark:border-slate-800
             dark:bg-slate-900
             "
+
           >
 
 
 
+
             <div
+
               className="
               flex
               flex-col
@@ -254,7 +246,9 @@ const DashboardLayout = () => {
               gap-4
               sm:flex-row
               "
+
             >
+
 
 
 
@@ -268,6 +262,7 @@ const DashboardLayout = () => {
                   🚀 ProgressHub
 
                 </h2>
+
 
 
                 <p className="text-sm text-slate-500 dark:text-slate-400">
@@ -286,14 +281,21 @@ const DashboardLayout = () => {
 
 
 
+
               <div className="flex gap-4">
 
 
 
+
+
                 <a
+
                   href="https://github.com/anantt1098"
+
                   target="_blank"
+
                   rel="noopener noreferrer"
+
                   className="
                   flex
                   h-10
@@ -308,6 +310,7 @@ const DashboardLayout = () => {
                   dark:bg-slate-800
                   dark:text-white
                   "
+
                 >
 
                   <FaGithub />
@@ -320,10 +323,16 @@ const DashboardLayout = () => {
 
 
 
+
+
                 <a
+
                   href="https://www.linkedin.com/in/anant-singh-7298a02a3/"
+
                   target="_blank"
+
                   rel="noopener noreferrer"
+
                   className="
                   flex
                   h-10
@@ -338,6 +347,7 @@ const DashboardLayout = () => {
                   dark:bg-blue-900/30
                   dark:text-blue-400
                   "
+
                 >
 
                   <FaLinkedin />
@@ -350,10 +360,16 @@ const DashboardLayout = () => {
 
 
 
+
+
                 <a
+
                   href="https://www.instagram.com/_anantt_/"
+
                   target="_blank"
+
                   rel="noopener noreferrer"
+
                   className="
                   flex
                   h-10
@@ -368,6 +384,7 @@ const DashboardLayout = () => {
                   dark:bg-pink-900/30
                   dark:text-pink-400
                   "
+
                 >
 
                   <FaInstagram />
@@ -376,7 +393,10 @@ const DashboardLayout = () => {
 
 
 
+
+
               </div>
+
 
 
 
@@ -390,7 +410,9 @@ const DashboardLayout = () => {
 
 
 
+
             <p
+
               className="
               mt-5
               text-center
@@ -398,6 +420,7 @@ const DashboardLayout = () => {
               text-slate-400
               dark:text-slate-500
               "
+
             >
 
               © {new Date().getFullYear()} ProgressHub. All rights reserved.
@@ -409,6 +432,7 @@ const DashboardLayout = () => {
 
 
           </footer>
+
 
 
 
@@ -443,6 +467,7 @@ const DashboardLayout = () => {
         updateGoal={updateGoal}
 
       />
+
 
 
 
